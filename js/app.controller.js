@@ -4,6 +4,8 @@ import { mapService } from './services/map.service.js'
 
 window.onload = onInit
 
+var gModalState
+
 // To make things easier in this project structure 
 // functions that are called from DOM are defined on a global app object
 window.app = {
@@ -158,9 +160,11 @@ function onPanToUserPos() {
 }
 
 function onUpdateLoc(locId) {
+    gModalState = 'edit'
     locService.getById(locId)
         .then(loc => {
-            const rate = prompt('New rate?', loc.rate)
+           showEditModal(loc)
+           const rate = prompt('enter rate')
             if (rate && rate !== loc.rate) {
                 loc.rate = rate
                 locService.save(loc)
@@ -175,6 +179,14 @@ function onUpdateLoc(locId) {
 
             }
         })
+}
+
+// function updateDetails
+
+function showEditModal({name , rate}){
+const elModal = document.querySelector('.edit-loc-modal')
+elModal.classList.remove('hidden')
+
 }
 
 function onSelectLoc(locId) {
