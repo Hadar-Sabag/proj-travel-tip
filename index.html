@@ -39,7 +39,7 @@
             <section class="locs-container">
 
                 <section class="loc-filter">
-                    
+
                     <div>
                         <input name="filter-by-txt" type="text" placeholder="Search location"
                             oninput="app.onSetFilterBy({txt: this.value})" />
@@ -59,6 +59,7 @@
                         <select class="sort-by" onchange="app.onSetSortBy()">
                             <option value="name">Name</option>
                             <option value="rate" selected>Rate</option>
+                            <option value="createdAt" selected>Creation Date</option>
                         </select>
                         <label>
                             <input class="sort-desc" type="checkbox" oninput="app.onSetSortBy()" />
@@ -82,7 +83,7 @@
 
                         <ul class="legend">
                         </ul>
-        
+
                     </div>
 
                 </section>
@@ -95,7 +96,7 @@
     <div class="user-msg"></div>
 
     <script type="module" src="js/app.controller.js"></script>
-    
+
 </body>
 
 </html>
