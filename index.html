@@ -9,8 +9,11 @@
 </head>
 
 <body>
+
     <header>
+
         <h1>TravelTip</h1>
+
         <section class="selected-loc">
             <h2>Location: <span class="loc-name"></span> <span class="loc-rate"></span></h2>
             <h4 class="loc-address"></h4>
@@ -18,22 +21,30 @@
             <button onclick="app.onShareLoc()">Share location</button>
             <input name="loc-copier" />
         </section>
+
         <form class="form-search" onsubmit="app.onSearchAddress(event)">
             <input type="text" name="address" placeholder="Search address" />
             <button title="Search">🔍</button>
             <button type="button" title="My Position" onclick="app.onPanToUserPos()" class="btn-user-pos">&nbsp;
             </button>
         </form>
+
     </header>
+
     <main>
+
         <div class="map"></div>
+
         <div>
             <section class="locs-container">
+
                 <section class="loc-filter">
+                    
                     <div>
                         <input name="filter-by-txt" type="text" placeholder="Search location"
                             oninput="app.onSetFilterBy({txt: this.value})" />
                     </div>
+
                     <div>
                         <label>
                             Min Rate:
@@ -42,6 +53,7 @@
                                 onchange="this.title=this.value;app.onSetFilterBy({minRate: this.value})" />
                         </label>
                     </div>
+
                     <p>
                         Sort by:
                         <select class="sort-by" onchange="app.onSetSortBy()">
@@ -53,23 +65,37 @@
                             Descending
                         </label>
                     </p>
+
                 </section>
+
                 <h3>Locations</h3>
-                <ul class="loc-list"></ul>
+
+                <ul class="loc-list">
+                </ul>
+
                 <section class="loc-stats">
                     <h3>Statistics</h3>
                     <div class="loc-stats-rate">
                         <h4>By rate:</h4>
+
                         <div class="pie"></div>
-                        <ul class="legend"></ul>
+
+                        <ul class="legend">
+                        </ul>
+        
                     </div>
+
                 </section>
+
             </section>
         </div>
     </main>
+
     <pre class="debug" hidden></pre>
     <div class="user-msg"></div>
+
     <script type="module" src="js/app.controller.js"></script>
+    
 </body>
 
 </html>
