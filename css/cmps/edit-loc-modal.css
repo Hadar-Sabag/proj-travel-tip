@@ -1,3 +1,13 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
 .edit-loc-modal {
     display: flex;
     gap: 16px;
@@ -10,15 +20,23 @@
 
 
     padding: 32px;
-
     background-color: antiquewhite;
     color: black;
+    border-radius: 8px;
+    min-width: 250px;
 }
 
-.edit-loc-modal .loc-rate{
+.edit-loc-modal .loc-rate {
     width: 40px;
 }
 
-.edit-loc-modal.hidden{
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.modal-backdrop.hidden,
+.edit-loc-modal.hidden {
     display: none;
 }

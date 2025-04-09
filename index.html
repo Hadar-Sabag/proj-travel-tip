@@ -107,13 +107,20 @@
     <div class="user-msg"></div>
 
 
+    <div class="modal-backdrop hidden" onclick="onCloseModal()"></div>
+
     <div class="edit-loc-modal hidden">
         <p>Location Name</p>
         <input type="text" class="loc-name">
         <p>Location Rate</p>
-        <input type="number" class="loc-rate">
-        <button class="send-loc-details-btn">send</button>
+        <input type="number" class="loc-rate" min="1" max="5">
+        <div class="modal-buttons">
+            <button class="send-loc-details-btn" onclick="app.onSaveModal()">Send</button>
+            <button class="cancel-loc-details-btn" onclick="app.onCloseModal()">Cancel</button>
+
+        </div>
     </div>
+
 
     <script type="module" src="js/app.controller.js"></script>
 
