@@ -18,6 +18,8 @@ window.app = {
     onSetFilterBy,
 }
 
+var gUserPos
+
 function onInit() {
     getFilterByFromQueryParams()
     loadAndRenderLocs()
@@ -36,11 +38,22 @@ function renderLocs(locs) {
     const selectedLocId = getLocIdFromQueryParams()
 
     var strHTML = locs.map(loc => {
+        let str = ''
+        if (gUserPos) {
+            const latLng = {
+                lat: loc.geo.lat,
+                lng: loc.geo.lng
+            }
+            const distance = utilService.getDistance(latLng, gUserPos, 'K')
+            str = `Distance: ${distance} KM.`
+        }
+
         const className = (loc.id === selectedLocId) ? 'active' : ''
         return `
         <li class="loc ${className}" data-id="${loc.id}">
             <h4>  
                 <span>${loc.name}</span>
+                <span>${str}</span>
                 <span title="${loc.rate} stars">${'★'.repeat(loc.rate)}</span>
             </h4>
             <p class="muted">
@@ -70,7 +83,7 @@ function renderLocs(locs) {
 
 function onRemoveLoc(locId) {
     const isConfirmed = confirm('delete?')
-    if(!isConfirmed) return
+    if (!isConfirmed) return
     locService.remove(locId)
         .then(() => {
             flashMsg('Location removed')
@@ -130,6 +143,8 @@ function onPanToUserPos() {
     mapService.getUserPosition()
         .then(latLng => {
             mapService.panTo({ ...latLng, zoom: 15 })
+            gUserPos = latLng
+            console.log('latLng: ', latLng)
             unDisplayLoc()
             loadAndRenderLocs()
             flashMsg(`You are at Latitude: ${latLng.lat} Longitude: ${latLng.lng}`)
@@ -182,8 +197,16 @@ function displayLoc(loc) {
     el.querySelector('.loc-rate').innerHTML = '★'.repeat(loc.rate)
     el.querySelector('[name=loc-copier]').value = window.location
     el.classList.add('show')
-
     utilService.updateQueryParams({ locId: loc.id })
+    if (gUserPos) {
+        const latLng = {
+            lat: loc.geo.lat,
+            lng: loc.geo.lng
+        }
+        const distance = utilService.getDistance(latLng, gUserPos, 'K')
+        const str = `Distance: ${distance} KM.`
+        el.querySelector('.loc-distance').innerText = str
+    }
 }
 
 function unDisplayLoc() {
